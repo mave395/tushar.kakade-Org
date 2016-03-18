@@ -1,0 +1,19 @@
+<apex:page controller="InvoiceController">
+    <apex:form >
+    <apex:pageBlock id="pgBlk">
+        <apex:pageBlockTable value="{!allInvoices}" var="eachInvoice"> 
+            <apex:column ><apex:commandLink onclick="getinno('{!eachInvoice.Id}');return false;" value="{!eachInvoice.Name}" /></apex:column>
+        </apex:pageBlockTable>
+        <apex:actionFunction name="getInvoice" action="{!getInvoiceStatement}" reRender="pgBlk">
+            <apex:param value="" name="invoId" assignTo="{!invoiceId}" />            
+        </apex:actionFunction>
+    </apex:pageBlock>
+    </apex:form>
+    
+<script>
+function getinno(temp){
+    alert('temp'+temp);
+    getInvoice(temp);
+}
+</script>        
+</apex:page>
