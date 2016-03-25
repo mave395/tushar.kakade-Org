@@ -44,15 +44,3 @@
     }
 </script>
 </apex:page>
-
-<!--
-<apex:outputPanel id="asdf">
-        <apex:outputText value="{!accRelatedContacts.Name}"></apex:outputText> 
-        <apex:outputText value="{!accRelatedOpportunities.Name}"></apex:outputText>
-</apex:outputPanel>
--->
-
-<!--<apex:column value="{!eachOpportunity.Phone}"/>
-            <apex:column value="{!eachOpportunity.MailingAddress}"/>-->
-            
-            <!--<apex:column value="{!eachContact.MailingAddress}" headerValue="Contact Name"/>-->
