@@ -1,0 +1,58 @@
+<apex:page standardController="Account" recordSetVar="accounts" extensions="RelatedOppAndContController">
+    
+    <apex:form >
+        <apex:pageBlock >
+            <apex:pageBlockTable value="{!accounts}" var="eachAccount">
+                
+                <apex:column >
+                    <apex:commandLink onclick="display('{!eachAccount.id}');return false;">
+                        {!eachAccount.Name}       
+                    </apex:commandLink>
+                </apex:column> 
+                
+                <apex:column value="{!eachAccount.Phone}"/> 
+            
+            </apex:pageBlockTable>
+        </apex:pageBlock>
+        
+        <apex:actionFunction name="callDisplayRelated" action="{!displayRelatedLists}" reRender="asdf">
+            <apex:param value="" name="aid" assignTo="{!accId}"/>
+        </apex:actionFunction>
+    </apex:form>
+
+    <apex:pageBlock id="asdf">
+        
+        <apex:pageBlockTable value="{!accRelatedOpportunities}" var="eachOpportunity" rendered="{!opportunitiesRendered}">
+            <apex:column value="{!eachOpportunity.Name}"/>        
+        </apex:pageBlockTable>
+    
+        <apex:pageBlockTable value="{!accRelatedContacts}" var="eachContact" rendered="{!contactsRendered }">
+            <apex:column value="{!eachContact.Name}" headerValue="Contact Name"/>
+            <apex:column value="{!eachContact.Phone}" headerValue="Contact Phone"/>            
+        </apex:pageBlockTable>
+        
+    </apex:pageBlock>
+    
+    
+    
+    
+    
+<script>
+    function display(temp){
+        //alert(temp);
+        callDisplayRelated(temp);
+    }
+</script>
+</apex:page>
+
+<!--
+<apex:outputPanel id="asdf">
+        <apex:outputText value="{!accRelatedContacts.Name}"></apex:outputText> 
+        <apex:outputText value="{!accRelatedOpportunities.Name}"></apex:outputText>
+</apex:outputPanel>
+-->
+
+<!--<apex:column value="{!eachOpportunity.Phone}"/>
+            <apex:column value="{!eachOpportunity.MailingAddress}"/>-->
+            
+            <!--<apex:column value="{!eachContact.MailingAddress}" headerValue="Contact Name"/>-->
