@@ -1,66 +1,62 @@
 <apex:page controller="InvoiceController" action="{!display}" renderAs="pdf">
 
-    <apex:pageBlock >
-        <apex:pageBlockSection columns="2">
-            <apex:pageBlockSectionItem >
-                Croma Retail<br/><br/> NSG Street <br/><br/> Pune Maharashtra 411001 <br/> Phone No : 020-99885522
-            </apex:pageBlockSectionItem>
-            <apex:pageBlockSectionItem dataStyle="float=right">
-                <b><p style="font-size:400%;color:blue" align="right">INVOICE</p></b>
-            </apex:pageBlockSectionItem>
-            
-        </apex:pageBlockSection>
-    </apex:pageBlock>
+        <p style="font-size:300%;color:blue;float:right">INVOICE<br/><br/></p>
+      
+        Croma Retail<br/> NSG Street <br/> Pune Maharashtra 411001 <br/> Phone No : 020-99885522    
+      
     
-    <apex:pageBlock >
-        <div style = "float:right;">    
-        <apex:pageBlockSection columns="1">
-            
-            <apex:repeat value="{!invoiceRecord}" var="eachInvoice">
-                <apex:pageBlockSectionItem >Invoice Number : {!eachInvoice.Name}</apex:pageBlockSectionItem>
-                <apex:pageBlockSectionItem >Date : {!eachInvoice.Invoice_Date__c}</apex:pageBlockSectionItem>
-            </apex:repeat>
-        </apex:pageBlockSection>
-        </div>  
-    </apex:pageBlock>
+        <br/><br/>
+        <p style="font-size:100%;color:black;float:right">    
+            Invoice Number : {!invoiceRecord[0].Name}<br/>
+            Date : {!day(TODAY())}/{!MONTH(TODAY())}/{!year(TODAY())}
+        </p>
     
-     <br/><br/><br/><br/><br/><br/>    
+     
+     
+     <br/><br/><br/>   
      <apex:pageBlock >            
-        <apex:pageBlockSection columns="1">
-            <apex:repeat value="{!invoiceRecord}" var="eachInvoice">
-                <apex:pageBlockSectionItem ><b>Bill To</b></apex:pageBlockSectionItem><br/>
-                <apex:pageBlockSectionItem >Name :     {!eachInvoice.Name__c}</apex:pageBlockSectionItem><br/>
-                <apex:pageBlockSectionItem >Company :  {!eachInvoice.Company_Name__c}</apex:pageBlockSectionItem><br/>
-                <apex:pageBlockSectionItem >Street :   {!eachInvoice.Street__c}</apex:pageBlockSectionItem><br/>
-                <apex:pageBlockSectionItem >City :     {!eachInvoice.City__c}</apex:pageBlockSectionItem><br/>
-                <apex:pageBlockSectionItem >State :    {!eachInvoice.State__c}</apex:pageBlockSectionItem><br/>
-                <apex:pageBlockSectionItem >Zip :      {!eachInvoice.ZIP__c}</apex:pageBlockSectionItem><br/>
-                <apex:pageBlockSectionItem >Phone :    {!eachInvoice.Phone__c}</apex:pageBlockSectionItem><br/>
-                <apex:pageBlockSectionItem >Email :    {!eachInvoice.Email__c} </apex:pageBlockSectionItem>
-            </apex:repeat>
+     <apex:pageBlockSection columns="1">
+            
+                <b>Bill To</b><br/>
+                {!invoiceRecord[0].Name__c}<br/>
+                {!invoiceRecord[0].Company_Name__c}<br/>
+                {!invoiceRecord[0].Street__c}<br/>
+                {!invoiceRecord[0].City__c},
+                {!invoiceRecord[0].State__c},
+                {!invoiceRecord[0].ZIP__c}<br/>
+                {!invoiceRecord[0].Phone__c}<br/>
+                {!invoiceRecord[0].Email__c}
+            
         </apex:pageBlockSection>
         
     </apex:pageBlock>
-     <br/><br/><br/><br/><br/><br/>
+    
+    <br/><br/><br/>
+    <b>Invoice Details</b>
     <apex:pageBlock >
         <apex:pageBlockTable value="{!lstLineItems}" var="eachLineItem" border="1">
-            <apex:column headerValue="Description">{!eachLineItem.Description__c}</apex:column>
-            <apex:column headerValue="Amount">{!eachLineItem.amount__c }</apex:column>
-        </apex:pageBlockTable>
-    </apex:pageBlock>
+            <apex:column headerValue="Description" width="150">{!eachLineItem.Description__c}</apex:column>
+            <apex:column headerValue="Amount" width="150">{!eachLineItem.Amount__c }</apex:column>
+            <apex:column headerValue="Tax" width="150">{!eachLineItem.Tax__c}</apex:column>
+            <apex:column headerValue="Total" width="150">{!eachLineItem.Total__c}</apex:column>
+            
+        </apex:pageBlockTable><br/><br/>
+        <apex:outputText >Total Bill : {!invoiceRecord[0].Total_Bill__c}</apex:outputText>
+    </apex:pageBlock><br/><br/>
     
-
-
-Invoice : {!invoiceRecord}
-<br/>
-Line Items : {!lstLineItems}
+    <center>If you have any question about this invoice, please contact</center>
+    <center>Croma Stores Phone No : 020-99885522 Email:support@croma.in</center>
+    
 </apex:page>
 
 
 
 
 
-<!--
+<!--  {!day(TODAY())}/{!MONTH(TODAY())}/{!year(TODAY())}
+
+{!eachInvoice.Invoice_Date__c}
+
         <apex:pageBlockTable value="{!invoiceRecord}" var="eachInvoice" >
             <apex:column headerValue="Name">{!eachInvoice.Name__c}                   </apex:column>
             <apex:column headerValue="Company">{!eachInvoice.Company_Name__c}           </apex:column>
@@ -80,6 +76,8 @@ Line Items : {!lstLineItems}
         </apex:pageBlockTable>
         
         
-        
+     Invoice : {!invoiceRecord}
+     <br/>
+     Line Items : {!lstLineItems}   
         
         -->
